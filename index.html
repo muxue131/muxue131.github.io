@@ -1,334 +1,631 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>前端开发博客 - 首页</title>
-    <!-- 引入图标库 (FontAwesome) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* --- CSS 变量定义 (主题色) --- */
-        :root {
-            --primary-color: #3b82f6; /* 亮蓝色 */
-            --secondary-color: #1e293b; /* 深色文本 */
-            --bg-color: #f8fafc; /* 浅灰背景 */
-            --card-bg: #ffffff; /* 卡片背景 */
-            --text-color: #334155; /* 正文颜色 */
-            --border-radius: 12px;
-            --transition: all 0.3s ease;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=2.0, minimum-scale=0.5">
+  <title>muxue · 山间小记</title>
+  <!-- 使用现代字体与优雅风格，完全符合个人博客气质 -->
+  <style>
+    /* 全局变量与重置 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        /* --- 基础重置 --- */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            transition: var(--transition);
-        }
-        a { text-decoration: none; color: inherit; transition: var(--transition); }
-        ul { list-style: none; }
+    :root {
+      --bg-color: #fdf8f2;
+      --surface: #ffffff;
+      --text-primary: #3e3a37;
+      --text-secondary: #6b625a;
+      --accent: #c8956c;
+      --accent-soft: #e7d7c4;
+      --border: #e2d9cd;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+      --radius: 20px;
+      --transition: 0.25s ease;
+    }
 
-        /* --- 导航栏 --- */
-        .navbar {
-            background: var(--card-bg);
-            padding: 1rem 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a:hover { color: var(--primary-color); }
-        .theme-toggle { cursor: pointer; font-size: 1.2rem; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      font-family: 'Segoe UI', 'Noto Serif SC', 'Times New Roman', '宋体', Georgia, serif;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      transition: background-color 0.4s ease, color 0.3s ease;
+      padding: 2rem 1.5rem;
+    }
 
-        /* --- Hero 区域 --- */
-        .hero {
-            text-align: center;
-            padding: 4rem 1rem;
-            background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%);
-        }
-        .avatar {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid white;
-            box-shadow: var(--shadow);
-            margin-bottom: 1rem;
-        }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: var(--secondary-color); }
-        .hero p { font-size: 1.1rem; color: #64748b; margin-bottom: 1.5rem; }
-        .social-icons a {
-            font-size: 1.5rem;
-            margin: 0 10px;
-            color: var(--secondary-color);
-        }
-        .social-icons a:hover { color: var(--primary-color); transform: translateY(-3px); display: inline-block; }
+    /* 整体容器 - 居中优雅 */
+    .blog-container {
+      max-width: 880px;
+      margin: 0 auto;
+      width: 100%;
+      background-color: var(--surface);
+      border-radius: 2.5rem;
+      box-shadow: var(--shadow);
+      padding: 2.5rem 2.8rem;
+      transition: background-color 0.4s ease, box-shadow 0.3s;
+      backdrop-filter: blur(2px);
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+    }
 
-        /* --- 通用容器 --- */
-        .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: var(--secondary-color);
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 50px;
-            height: 4px;
-            background: var(--primary-color);
-            margin: 10px auto 0;
-            border-radius: 2px;
-        }
+    /* 头部区域 */
+    .blog-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.4rem;
+      transition: border-color 0.3s;
+    }
 
-        /* --- 技术栈 --- */
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 1rem;
-        }
-        .skill-tag {
-            background: var(--card-bg);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow);
-            font-weight: 500;
-            border: 1px solid #e2e8f0;
-        }
-        .skill-tag:hover { border-color: var(--primary-color); color: var(--primary-color); }
+    .author-section h1 {
+      font-size: 2.8rem;
+      font-weight: 450;
+      letter-spacing: 2px;
+      color: var(--text-primary);
+      margin-bottom: 0.2rem;
+      font-family: "Noto Serif SC", "楷体", "KaiTi", serif;
+      transition: color 0.3s;
+    }
 
-        /* --- 项目展示 --- */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        .project-card {
-            background: var(--card-bg);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        .project-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
-        .project-img { width: 100%; height: 200px; background-color: #cbd5e1; object-fit: cover; }
-        .project-info { padding: 1.5rem; }
-        .project-info h3 { margin-bottom: 0.5rem; color: var(--secondary-color); }
-        .project-info p { font-size: 0.9rem; color: #64748b; margin-bottom: 1rem; }
-        .btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: var(--primary-color);
-            color: white;
-            border-radius: 6px;
-            font-size: 0.9rem;
-        }
-        .btn:hover { opacity: 0.9; }
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      font-style: italic;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.3s;
+    }
 
-        /* --- 博客文章 --- */
-        .blog-list { display: flex; flex-direction: column; gap: 1.5rem; }
-        .blog-item {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: var(--transition);
-        }
-        .blog-item:hover { border-left: 4px solid var(--primary-color); }
-        .blog-date { font-size: 0.85rem; color: #94a3b8; margin-bottom: 0.25rem; }
-        .blog-title { font-size: 1.2rem; font-weight: 600; color: var(--secondary-color); }
-        .read-more { color: var(--primary-color); font-weight: 500; }
+    .subtitle::before {
+      content: "🌸";
+      font-style: normal;
+      font-size: 1.2rem;
+    }
 
-        /* --- 页脚 --- */
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: var(--secondary-color);
-            color: #94a3b8;
-            margin-top: 2rem;
-        }
+    /* 设置面板行 */
+    .settings-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.8rem;
+      background: var(--bg-color);
+      padding: 0.8rem 1.5rem;
+      border-radius: 3rem;
+      transition: background-color 0.4s;
+    }
 
-        /* --- 响应式 --- */
-        @media (max-width: 768px) {
-            .navbar { flex-direction: column; gap: 1rem; }
-            .nav-links { gap: 1rem; font-size: 0.9rem; }
-            .hero h1 { font-size: 2rem; }
-            .blog-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
-        }
-    </style>
+    .bg-switcher {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .bg-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .bg-btn:hover {
+      transform: scale(1.1);
+      border-color: var(--accent);
+    }
+
+    .bg-btn.active-bg {
+      border: 2px solid var(--accent);
+      box-shadow: 0 0 0 3px rgba(200, 149, 108, 0.3);
+    }
+
+    .theme-color-input {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .theme-color-input input[type="color"] {
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      background: transparent;
+      padding: 2px;
+    }
+
+    /* 导航标签 */
+    .nav-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 0.3rem 0 0.8rem;
+    }
+
+    .tag {
+      background: var(--bg-color);
+      padding: 0.35rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      transition: 0.2s;
+      cursor: default;
+      border: 1px solid transparent;
+    }
+
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--surface);
+    }
+
+    /* 文章卡片列表 */
+    .post-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      margin: 0.8rem 0 1rem;
+    }
+
+    .post-card {
+      background: var(--bg-color);
+      border-radius: 1.2rem;
+      padding: 1.5rem 1.8rem;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .post-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+      border-color: var(--accent-soft);
+    }
+
+    .post-title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .post-meta {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.8rem;
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .post-excerpt {
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    /* 留言区域 */
+    .guestbook-section {
+      background: var(--bg-color);
+      border-radius: 1.5rem;
+      padding: 1.5rem 1.8rem;
+      transition: background 0.3s;
+    }
+
+    .section-title {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-primary);
+    }
+
+    .message-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .message-input {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: 2.5rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-family: inherit;
+      resize: vertical;
+      transition: 0.2s;
+      color: var(--text-primary);
+    }
+
+    .message-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(200,149,108,0.2);
+    }
+
+    .btn {
+      background: var(--accent);
+      border: none;
+      color: white;
+      padding: 0.7rem 1.8rem;
+      border-radius: 2.5rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      align-self: flex-end;
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 10px rgba(200,149,108,0.3);
+    }
+
+    .btn:hover {
+      background: #b77f58;
+      box-shadow: 0 6px 14px rgba(180, 120, 70, 0.4);
+    }
+
+    .messages-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-height: 240px;
+      overflow-y: auto;
+      padding-right: 0.3rem;
+    }
+
+    .message-item {
+      background: var(--surface);
+      border-radius: 1.2rem;
+      padding: 0.8rem 1.2rem;
+      font-size: 0.95rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message-author {
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    .message-text {
+      color: var(--text-primary);
+      margin-top: 0.2rem;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      opacity: 0.8;
+    }
+
+    hr {
+      border: 0.5px solid var(--border);
+      margin: 0.5rem 0 1rem;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem 0.8rem;
+      }
+      .blog-container {
+        padding: 1.8rem 1.2rem;
+      }
+      .settings-row {
+        gap: 0.8rem;
+      }
+    }
+  </style>
 </head>
 <body>
-
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="logo">&lt;DevName /&gt;</div>
-        <ul class="nav-links">
-            <li><a href="#home">首页</a></li>
-            <li><a href="#skills">技能</a></li>
-            <li><a href="#projects">项目</a></li>
-            <li><a href="#blog">博客</a></li>
-            <li><a href="#contact">联系</a></li>
-        </ul>
-        <div class="theme-toggle" onclick="toggleTheme()">
-            <i class="fas fa-moon"></i>
-        </div>
-    </nav>
-
-    <!-- Hero 个人简介 -->
-    <header id="home" class="hero">
-        <!-- 请替换为您的头像链接 -->
-        <img src="https://ui-avatars.com/api/?name=Front+End&background=3b82f6&color=fff&size=128" alt="头像" class="avatar">
-        <h1>你好，我是前端开发工程师</h1>
-        <p>热衷于构建高性能、响应式的 Web 应用，专注于用户体验与代码质量。</p>
-        <div class="social-icons">
-            <a href="#"><i class="fab fa-github"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-weixin"></i></a>
-            <a href="#"><i class="fas fa-envelope"></i></a>
-        </div>
+  <div class="blog-container" id="blogContainer">
+    
+    <!-- 头部：作者名 + 个性签名 -->
+    <header class="blog-header">
+      <div class="author-section">
+        <h1>muxue</h1>
+        <div class="subtitle">山间清风 · 纸上日月</div>
+      </div>
+      <div class="nav-tags">
+        <span class="tag">📖 随笔</span>
+        <span class="tag">🌿 自然</span>
+        <span class="tag">📷 摄影</span>
+        <span class="tag">☕ 日常</span>
+      </div>
     </header>
 
-    <!-- 技术栈 -->
-    <section id="skills" class="container">
-        <h2 class="section-title">技术栈</h2>
-        <div class="skills-grid">
-            <span class="skill-tag"><i class="fab fa-html5"></i> HTML5 & CSS3</span>
-            <span class="skill-tag"><i class="fab fa-js"></i> JavaScript (ES6+)</span>
-            <span class="skill-tag"><i class="fab fa-react"></i> React.js</span>
-            <span class="skill-tag"><i class="fab fa-vuejs"></i> Vue.js</span>
-            <span class="skill-tag"><i class="fab fa-sass"></i> Sass / Less</span>
-            <span class="skill-tag"><i class="fas fa-wind"></i> Tailwind CSS</span>
-            <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
-            <span class="skill-tag"><i class="fab fa-node"></i> Node.js</span>
-        </div>
+    <!-- 设置行：更换背景 + 主题颜色 -->
+    <div class="settings-row">
+      <div class="bg-switcher">
+        <span style="color: var(--text-secondary); font-size:0.9rem;">🎨 背景</span>
+        <button class="bg-btn active-bg" data-bg="fdf8f2" style="background: #fdf8f2;" title="暖白"></button>
+        <button class="bg-btn" data-bg="f2f0e9" style="background: #f2f0e9;" title="米灰"></button>
+        <button class="bg-btn" data-bg="e8f0f2" style="background: #e8f0f2;" title="雾蓝"></button>
+        <button class="bg-btn" data-bg="f5f0e7" style="background: #f5f0e7;" title="亚麻"></button>
+      </div>
+      <div class="theme-color-input">
+        <label for="accentPicker">🔸 主题色</label>
+        <input type="color" id="accentPicker" value="#c8956c" title="选择主题色">
+      </div>
+    </div>
+
+    <!-- 文章列表区域（模拟博客文章） -->
+    <section class="post-list">
+      <article class="post-card">
+        <div class="post-title">📝 雨后山行</div>
+        <div class="post-meta"><span>📅 2025-04-10</span><span>🏷️ 自然 · 随笔</span></div>
+        <p class="post-excerpt">雾从谷底升起，整座山都变得柔软。石阶上的青苔吸饱了水，踩上去仿佛能听见森林的呼吸……</p>
+      </article>
+      <article class="post-card">
+        <div class="post-title">✨ 重构阅读角落</div>
+        <div class="post-meta"><span>📅 2025-04-02</span><span>🏷️ 日常 · 生活</span></div>
+        <p class="post-excerpt">把旧书架移到窗边，午后光线恰好落在《枕草子》的封面上。一盏茶，几行字，便是最好的休息。</p>
+      </article>
+      <article class="post-card">
+        <div class="post-title">📷 胶片里的春天</div>
+        <div class="post-meta"><span>📅 2025-03-28</span><span>🏷️ 摄影</span></div>
+        <p class="post-excerpt">用一台老式旁轴相机拍下巷口的玉兰。胶片特有的颗粒感让时光倒流，每一帧都带着温度。</p>
+      </article>
     </section>
 
-    <!-- 项目展示 -->
-    <section id="projects" class="container">
-        <h2 class="section-title">精选项目</h2>
-        <div class="projects-grid">
-            <!-- 项目 1 -->
-            <article class="project-card">
-                <!-- 占位图 -->
-                <img src="https://images.unsplash.com/photo-1557821552-17105176677c?w=500&h=300&fit=crop" alt="项目预览" class="project-img">
-                <div class="project-info">
-                    <h3>电商后台管理系统</h3>
-                    <p>基于 Vue3 + Element Plus 开发的全功能后台，包含权限管理、数据可视化图表。</p>
-                    <a href="#" class="btn">查看详情 <i class="fas fa-arrow-right"></i></a>
-                </div>   < / div>
-            </article>
-            <!-- 项目 2 -->
-            <article class="project-card">
-                <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=500&h=300&fit=crop" alt="项目预览" class="project-img">
-                <div class="project-info">
-                    <h3>个人博客主题</h3>
-                    <p>使用 Next.js 和 Tailwind CSS 构建的静态博客，支持 SEO 和深色模式。</p>
-                    <a href="#" class="btn">查看详情 <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </article>
-            <!-- 项目 3 -->
-            <article class="project-card">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop" alt="项目预览" class="project-img">
-                <div class="project-info">
-                    <h3>任务管理 App</h3>
-                    <p>原生 JavaScript 开发的拖拽式任务看板，支持本地存储和 PWA 离线访问。</p>
-                    <a href="#" class="btn">查看详情 <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </article>
-        </div>
+    <!-- 留言板模块 -->
+    <section class="guestbook-section">
+      <div class="section-title">💬 路过留声 · 留言板</div>
+      
+      <div class="message-form">
+        <input type="text" id="guestName" class="message-input" placeholder="你的名字 (选填)" maxlength="20" style="width:60%;">
+        <textarea id="guestMessage" class="message-input" rows="2" placeholder="写下想对muxue说的话……" maxlength="200"></textarea>
+        <button class="btn" id="submitMessage">🌸 留下足迹</button>
+      </div>
+      
+      <div class="messages-list" id="messagesContainer">
+        <!-- 动态留言会插入这里，同时保留几条预设留言展示 -->
+      </div>
+      <div class="footer-note">✉️ 每一句留言都是山间的回音</div>
     </section>
-
-    <!-- 博客文章 -->
-    <section id="blog" class="container">
-        <h2 class="section-title">最新文章</h2><h2 class="section-title">最新文章</   & lt;h2>
-        <div class="blog-list">   <div class="blog-list">
-            <a href="#" class="blog-item"><a href="#" class="blog-item">
-                <div>   < div>
-                    <div class="blog-date">2023-10-24</div>
-                    <h3 class="blog-title">深入理解 JavaScript 闭包与作用域</h3>
-                </div>   < / div>
-                <span class="read-more">阅读文章 <i class="fas fa-angle-right"></i></span><span class="read-more">阅读文章 <i class="fas fa-angle-right"></i></span>
-            </a>   < / a>
-            <a href="#" class="blog-item"><a href="#" class="blog-item">
-                <div>   < div>
-                    <div class="blog-date">2023-10-15</div>< = " div克难;blog-date" > 2023-10-15< / div>
-                    <h3 class="blog-title">CSS Grid 布局完全指南</h3><h3 class="blog-title">CSS Grid 布局完全指南</h3>
-                </div>   < / div>
-                <span class="read-more">阅读文章 <i class="fas fa-angle-right"></i></span><span class="read-more">阅读文章 <i class="fas fa-angle-right"></i></span>
-            </a>   < / a>
-            <   < / a>a href="#" class="blog-item">
-                <<   < div>a href="#" class="blog-item">div>
-                    <div class="blog-date">2023-09-28</div>< = " div克难;blog-date" > 2023-09-28< / div>
-                    <h3 class="blog-title">React Hooks 最佳实践与性能优化</h3><h3 class="blog-title">React Hooks 最佳实践与性能优化</h3>
-                </div>   < / div>
-                <   < / div>span class="read-more">阅读文章 <i class="fas fa-angle-right"></i></span><span class="read-more">阅读文章 <i class="fas fa-angle-right"></i></span>
-            </a>   < / a>
-        </div>   < / div>
-    </section>   & lt; / section>
-
-    <!-- 页脚 -->
-    <footer id="contact">   <footer id="contact">
-        <<section   部分 id="blog" class   类="container">p>&copy; 2023 前端开发博客. 保留所有权利.</p>
-        <p>Designed & Built by You</p><p>；设计<；/p>；
+    
+    <hr>
+    <footer style="text-align: center; color: var(--text-secondary); font-size:0.9rem;">
+      © 2025 muxue · 构建于山野之间
     </footer>
+  </div>
 
-    <!-- 简单的 JavaScript 交互 --><!-- 简单的 JavaScript 交互 -->
-    <   < / footer>script>   < script>
-        // 深色模式切换逻辑
-        function toggleTheme() {   函数toggleTheme() {
-            const body = document.body;   Const body = document.body；
-            const icon = document.querySelector('.theme-toggle i');const icon = document.querySelector('。theme-toggle我);
-            
-            // 检查当前是否是深色模式
-            const isDark = body.style.backgroundColor === 'rgb(30, 41, 59)';const isDark = body.style.backgroundColor == 'rgb(30,41,59)'；
+  <script>
+    (function() {
+      // ----- 获取DOM元素 -----
+      const body = document.body;
+      const blogContainer = document.getElementById('blogContainer');
+      const bgButtons = document.querySelectorAll('.bg-btn');
+      const accentPicker = document.getElementById('accentPicker');
+      const submitBtn = document.getElementById('submitMessage');
+      const guestNameInput = document.getElementById('guestName');
+      const guestMessageInput = document.getElementById('guestMessage');
+      const messagesContainer = document.getElementById('messagesContainer');
 
-            if (!isDark) {
-                // 切换到深色
-                body.style.backgroundColor = '#1e293b';
-                body.style.color = '#f8fafc';
-                document.querySelector('.navbar').style.backgroundColor = '#334155';
-                document.querySelector('.section-title').style.color = '#f8fafc';document.querySelector .style(“.section-title”)。Color = '# f8ffac '；
-                icon.classList.remove('fa-moon');icon.classList.remove’fa-moon’);
-                icon.classList.add('fa-sun');icon.classList.add (fa -sun');
-                
-                // 简单的卡片颜色调整
-                document.querySelectorAll('.project-card, .blog-item, .skill-tag').forEach(el => {document.querySelectorAll('。project-card。博文,.skill-tag”)。forEach(el => {
-                    el.style.backgroundColor = '#334155';
-                    el.style.color = '#f8fafc';el.style.color = #f8fafc;
-                    el.style.border = '1px solid #475569';El.style.border = '1px solid #475569'；
-                });
+      // ----- 预设留言 (展示用) -----
+      const defaultMessages = [
+        { author: '山友·青岚', text: '喜欢你的文字，安静又有力量。' },
+        { author: '过客·林', text: '偶然走进这里，像发现了一片秘密森林。' },
+        { author: 'muxue', text: '欢迎每一位路过的朋友，愿此处让你慢下来。' }
+      ];
 
-            } else {
-                // 切换回浅色
-                body.style.backgroundColor = '#f8fafc';
-                body.style.color = '#334155';
-                document.querySelector('.navbar').style.backgroundColor = '#ffffff';
-                document.querySelector('.section-title').style.color = '#1e293b';document.querySelector .style(“.section-title”)。Color = '#1e293b'；
-                icon.classList.remove('fa-sun');icon.classList.remove (fa -sun');
-                icon.classList.add('fa-moon');icon.classList.add’fa-moon’);
+      // ----- 初始化留言渲染 -----
+      function renderMessages(messagesArray) {
+        if (!messagesContainer) return;
+        messagesContainer.innerHTML = '';
+        messagesArray.forEach(msg => {
+          const msgDiv = document.createElement('div');
+          msgDiv.className = 'message-item';
+          msgDiv.innerHTML = `
+            <span class="message-author">${escapeHTML(msg.author) || '匿名旅人'}</span>
+            <span class="message-text">${escapeHTML(msg.text)}</span>
+          `;
+          messagesContainer.appendChild(msgDiv);
+        });
+      }
 
-                // 还原卡片颜色
-                document.querySelectorAll('.project-card, .blog-item, .skill-tag').forEach(el => {document.querySelectorAll('。project-card。博文,.skill-tag”)。forEach(el => {
-                    el.style.backgroundColor = '#ffffff';
-                    el.style.color = '#334155';
-                    el.style.border = '1px solid #e2e8f0';El.style.border = '1px solid #e2e8f0'；
-                });
+      // 简单的转义防止XSS
+      function escapeHTML(str) {
+        return String(str)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      // 加载留言（从localStorage读取，若无则使用默认）
+      function loadMessages() {
+        const stored = localStorage.getItem('muxue_blog_messages');
+        if (stored) {
+          try {
+            const parsed = JSON.parse(stored);
+            if (Array.isArray(parsed) && parsed.length > 0) {
+              renderMessages(parsed);
+              return;
             }
+          } catch (e) {}
         }
-    </script>   < / script>
-</body>   < / body>
-</html   超文本标记语言>
+        // 默认留言
+        renderMessages(defaultMessages);
+        localStorage.setItem('muxue_blog_messages', JSON.stringify(defaultMessages));
+      }
+
+      // 保存留言到localStorage
+      function saveMessages(messagesArray) {
+        localStorage.setItem('muxue_blog_messages', JSON.stringify(messagesArray));
+      }
+
+      // 获取当前留言数组
+      function getCurrentMessages() {
+        const stored = localStorage.getItem('muxue_blog_messages');
+        if (stored) {
+          try {
+            const arr = JSON.parse(stored);
+            return Array.isArray(arr) ? arr : [];
+          } catch (e) {}
+        }
+        return [...defaultMessages];
+      }
+
+      // 添加新留言
+      function addMessage(author, text) {
+        if (!text.trim()) return;
+        const currentMessages = getCurrentMessages();
+        const newMsg = {
+          author: author.trim() || '匿名旅人',
+          text: text.trim()
+        };
+        currentMessages.push(newMsg);
+        // 保留最近30条防止过多
+        const updated = currentMessages.slice(-30);
+        saveMessages(updated);
+        renderMessages(updated);
+      }
+
+      // ----- 背景切换功能 -----
+      function setActiveBackgroundButton(bgValue) {
+        bgButtons.forEach(btn => {
+          const btnBg = btn.getAttribute('data-bg');
+          if (btnBg === bgValue) {
+            btn.classList.add('active-bg');
+          } else {
+            btn.classList.remove('active-bg');
+          }
+        });
+      }
+
+      function changeBackground(colorHex) {
+        if (!colorHex) return;
+        // 更新body背景色
+        body.style.backgroundColor = `#${colorHex}`;
+        // 同时更新CSS变量--bg-color，使得内部卡片等继承
+        document.documentElement.style.setProperty('--bg-color', `#${colorHex}`);
+        // 存储到本地
+        localStorage.setItem('muxue_bg_color', colorHex);
+        setActiveBackgroundButton(colorHex);
+      }
+
+      // 初始化背景
+      function initBackground() {
+        const savedBg = localStorage.getItem('muxue_bg_color');
+        if (savedBg) {
+          changeBackground(savedBg);
+        } else {
+          // 默认 #fdf8f2
+          changeBackground('fdf8f2');
+        }
+      }
+
+      // 绑定背景按钮事件
+      bgButtons.forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const bg = this.getAttribute('data-bg');
+          if (bg) {
+            changeBackground(bg);
+          }
+        });
+      });
+
+      // ----- 主题颜色设置 (accent) -----
+      function applyAccentColor(colorHex) {
+        if (!colorHex) return;
+        document.documentElement.style.setProperty('--accent', colorHex);
+        // 同时微调软 accent (基于主色变淡，简单处理)
+        // 使用一个较淡版本：通过透明度或混合，此处简单设置一个相关浅色
+        // 为了协调，生成一个柔和版
+        document.documentElement.style.setProperty('--accent-soft', colorHex + '40'); // 大约25%透明度
+        localStorage.setItem('muxue_accent_color', colorHex);
+        if (accentPicker) {
+          accentPicker.value = colorHex;
+        }
+      }
+
+      function initAccentColor() {
+        const savedAccent = localStorage.getItem('muxue_accent_color');
+        if (savedAccent) {
+          applyAccentColor(savedAccent);
+        } else {
+          applyAccentColor('#c8956c');
+        }
+      }
+
+      if (accentPicker) {
+        accentPicker.addEventListener('input', function(e) {
+          const newColor = e.target.value;
+          applyAccentColor(newColor);
+        });
+      }
+
+      // ----- 留言提交事件 -----
+      if (submitBtn) {
+        submitBtn.addEventListener('click', function() {
+          const name = guestNameInput ? guestNameInput.value : '';
+          const message = guestMessageInput ? guestMessageInput.value : '';
+          if (!message.trim()) {
+            alert('请写下留言内容再提交哦 🌱');
+            return;
+          }
+          addMessage(name, message);
+          // 清空输入框
+          if (guestNameInput) guestNameInput.value = '';
+          if (guestMessageInput) guestMessageInput.value = '';
+        });
+      }
+
+      // 支持回车快捷提交（在textarea中按Ctrl+Enter）
+      if (guestMessageInput) {
+        guestMessageInput.addEventListener('keydown', function(e) {
+          if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+            e.preventDefault();
+            submitBtn.click();
+          }
+        });
+      }
+
+      // ----- 额外：点击预设背景时存储并同步UI-----
+      // 已经在changeBackground中处理
+
+      // 启动所有
+      initBackground();
+      initAccentColor();
+      loadMessages();
+
+      // 确保容器背景也响应变量 (已通过var设置)
+      // 同时处理主题色切换时，active-bg 状态保持一致
+      // 监听存储事件（多标签页同步可选）
+      window.addEventListener('storage', (e) => {
+        if (e.key === 'muxue_bg_color') {
+          if (e.newValue) changeBackground(e.newValue);
+        } else if (e.key === 'muxue_accent_color') {
+          if (e.newValue) applyAccentColor(e.newValue);
+        } else if (e.key === 'muxue_blog_messages') {
+          loadMessages();
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>
