@@ -1,114 +1,162 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=2.0, minimum-scale=0.5">
-  <title>muxue · 山间小记</title>
-  <!-- 使用现代字体与优雅风格，完全符合个人博客气质 -->
-  <style>
-    /* 全局变量与重置 */
+html
+<!DOCTYPE html>   < !DOCTYPE html>
+<html lang="zh-CN">   < css长= " zh-CN" >
+<head>   < head   头>
+  <meta charset="UTF-8">   <meta   元 charset   字符集   字符集="UTF-8"   "UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=2.0, minimum-scale=0.5"><meta   元 name   名字   名字="viewport"   "viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=2.0, minimum-scale=0.5"；
+  <title   标题>muxue · 山间小记</title><title   标题>muxue · 山间小记</   & lt;title>
+  <style>   < style   风格>
+    /* ========== 全局重置与变量 ========== */
     * {
-      margin: 0;
-      padding: 0;
+      margin   保证金   保证金: 0;   保证金:0;
+      padding: 0;   填充:0;
       box-sizing: border-box;
     }
 
-    :root {
-      --bg-color: #fdf8f2;
+    :root {   :根{
+      --bg-color: #fdf8f2;   ——bg-color   本,本;bg-color   本,本;bg-color: # fdf8f2;
       --surface: #ffffff;
-      --text-primary: #3e3a37;
-      --text-secondary: #6b625a;
+      --text-primary: #3e3a37;   ——text-primary   本,本;text-primary   本,本;text-primary: # 3 e3a37;
+      --text-secondary: #6b625a;——text-secondary   本,本;text-secondary   本,本;text-secondary: # 6 b625a;
       --accent: #c8956c;
-      --accent-soft: #e7d7c4;
-      --border: #e2d9cd;
-      --shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
-      --radius: 20px;
-      --transition: 0.25s ease;
+      --accent-soft: #e7d7c4;   ——accent-soft   本,本;accent-soft   本,本;accent-soft: # e7d7c4;
+      --border: #e2d9cd;   …边境:# e2d9cd;
+      --shadow: 0 8px 30px rgba(0, 0, 0, 0.04);——阴影：0 8px 30px rgba(0,0,0,0.04)；
+      --font-serif: 'Noto Serif SC', '楷体', 'KaiTi', '华文楷体', '宋体', Georgia   乔治亚州, serif   衬线;
+      --font-sans: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
     }
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-primary);
-      font-family: 'Segoe UI', 'Noto Serif SC', 'Times New Roman', '宋体', Georgia, serif;
+    body {   身体{
+      background-color: var(--bg-color);background   背景 - color   颜色: var(——bg-color   本,本;bg-color);
+      color: var(--text-primary);颜色:var(——text-primary   本,本;text-primary);
+      font-family: var(--font-serif);
       line-height: 1.6;
       min-height: 100vh;
-      display: flex;
+      display: flex;   显示:flex;
       flex-direction: column;
-      transition: background-color 0.4s ease, color 0.3s ease;
-      padding: 2rem 1.5rem;
+      align-items: center;   对齐项目:中心;
+      justify-content: center;
+      padding: 2rem 1.2rem;
+      transition: background-color 0.4s ease;
     }
 
-    /* 整体容器 - 居中优雅 */
+    /* 主容器 */
     .blog-container {
-      max-width: 880px;
-      margin: 0 auto;
+      max-width: 900px;
       width: 100%;
       background-color: var(--surface);
       border-radius: 2.5rem;
       box-shadow: var(--shadow);
-      padding: 2.5rem 2.8rem;
-      transition: background-color 0.4s ease, box-shadow 0.3s;
-      backdrop-filter: blur(2px);
-      display: flex;
+      padding: 2.5rem 2.2rem;
+      display: flex;   显示:flex;
       flex-direction: column;
       gap: 2.2rem;
+      transition: background-color 0.4s, box-shadow 0.3s;
     }
 
     /* 头部区域 */
     .blog-header {
-      display: flex;
+      display: flex;   显示:flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: flex-end;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 1.4rem;
-      transition: border-color 0.3s;
+      padding-bottom: 1.4rem;   padding-bottom: 1.4快速眼动;
+      gap: 1rem;
     }
 
-    .author-section h1 {
-      font-size: 2.8rem;
-      font-weight: 450;
-      letter-spacing: 2px;
-      color: var(--text-primary);
-      margin-bottom: 0.2rem;
-      font-family: "Noto Serif SC", "楷体", "KaiTi", serif;
-      transition: color 0.3s;
+    .author-block {
+      display: flex;   显示:flex;
+      flex-direction: column;
+      gap: 0.2rem;
     }
 
-    .subtitle {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      font-style: italic;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: color 0.3s;
-    }
-
-    .subtitle::before {
-      content: "🌸";
-      font-style: normal;
-      font-size: 1.2rem;
-    }
-
-    /* 设置面板行 */
-    .settings-row {
-      display: flex;
+    .author-name {
+      font-size: 2.8rem;   字体大小:2.8快速眼动;
+      font-weight: 450;   粗细:450;
+      letter-spacing: 2px;   字母间距:2 px;
+      color: var(--text-primary);颜色:var(——text-primary   本,本;text-primary);
+      font-family: var(--font-serif);
+      display: flex;   显示:flex;
+      align-items: baseline;
       flex-wrap: wrap;
-      align-items: center;
-      gap: 1.8rem;
+      gap: 0.8rem;
+    }
+
+    /* 实时日期时间标签 */
+    .live-datetime {
+      font-size: 0.9rem;
+      font-weight: 400;
       background: var(--bg-color);
-      padding: 0.8rem 1.5rem;
+      color: var(--accent);
+      padding: 0.25rem 1.2rem;
+      border-radius: 2rem;
+      white-space: nowrap;
+      font-family: var(--font-sans);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      transition: background 0.3s, color 0.3s;
+      border: 1px solid var(--border);
+    }
+
+    .subtitle {   ．(字幕){
+      color: var(--text-secondary);颜色:var(——text-secondary   本,本;text-secondary);
+      font-size: 1rem;   字体大小:1快速眼动;
+      font-style: italic;   字体样式:斜体;
+      display: flex;   显示:flex;
+      align-items: center;   对齐项目:中心;
+      gap: 0.4rem;   差距:0.4快速眼动;
+    }
+    .subtitle::before {   ．副标题:{之前
+      content   内容: "🌸";
+      font-style: normal;
+      font-size: 1.2rem   快速眼动;
+    }
+
+    /* 导航标签 */
+    .nav-tags {
+      display: flex;   显示:flex;
+      flex-wrap: wrap;
+      gap: 0.7rem   快速眼动;
+    }
+    .tag {
+      background: var(--bg-color);
+      padding: 0.35rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);颜色:var(——text-secondary   本,本;text-secondary);
+      border: 1px solid transparent;
+      transition: 0.2s;
+      cursor: default;
+    }
+    .tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--surface);
+    }
+
+    /* 设置面板 */
+    .settings-panel {
+      display: flex;   显示:flex;
+      flex-wrap: wrap;
+      align-items: center;   对齐项目:中心;
+      justify-content: space-between;
+      gap: 1.5rem;
+      background: var(--bg-color);
+      padding: 0.9rem 1.8rem;
       border-radius: 3rem;
-      transition: background-color 0.4s;
+      transition: background 0.4s;
     }
-
-    .bg-switcher {
-      display: flex;
-      gap: 0.6rem;
-      align-items: center;
+    .bg-group, .theme-group {
+      display: flex;   显示:flex;
+      align-items: center;   对齐项目:中心;
+      gap: 0.8rem;
+      flex-wrap: wrap;
     }
-
+    .bg-label, .theme-label {
+      color: var(--text-secondary);颜色:var(——text-secondary   本,本;text-secondary);
+      font-size: 0.9rem;
+      font-family: var(--font-sans);
+    }
     .bg-btn {
       width: 32px;
       height: 32px;
@@ -116,156 +164,128 @@
       border: 2px solid transparent;
       cursor: pointer;
       transition: 0.2s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
-
     .bg-btn:hover {
-      transform: scale(1.1);
+      transform: scale(1.12);
       border-color: var(--accent);
     }
-
     .bg-btn.active-bg {
       border: 2px solid var(--accent);
-      box-shadow: 0 0 0 3px rgba(200, 149, 108, 0.3);
+      box-shadow: 0 0 0 3px rgba(200, 149, 108, 0.35);
     }
-
-    .theme-color-input {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    .theme-color-input input[type="color"] {
-      width: 36px;
-      height: 36px;
+    .color-input {
+      width: 38px;
+      height: 38px;
       border: 1px solid var(--border);
-      border-radius: 8px;
+      border-radius: 10px;
       cursor: pointer;
       background: transparent;
-      padding: 2px;
+      padding: 3px;
     }
 
-    /* 导航标签 */
-    .nav-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-      margin: 0.3rem 0 0.8rem;
-    }
-
-    .tag {
-      background: var(--bg-color);
-      padding: 0.35rem 1.2rem;
-      border-radius: 2rem;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      transition: 0.2s;
-      cursor: default;
-      border: 1px solid transparent;
-    }
-
-    .tag:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--surface);
-    }
-
-    /* 文章卡片列表 */
+    /* 文章卡片 */
     .post-list {
-      display: flex;
+      display: flex;   显示:flex;
       flex-direction: column;
-      gap: 1.8rem;
-      margin: 0.8rem 0 1rem;
+      gap: 1.6rem;
     }
-
     .post-card {
       background: var(--bg-color);
       border-radius: 1.2rem;
       padding: 1.5rem 1.8rem;
-      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+      transition: 0.25s ease;
       border: 1px solid transparent;
     }
-
     .post-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
       border-color: var(--accent-soft);
     }
-
     .post-title {
       font-size: 1.5rem;
       font-weight: 500;
-      margin-bottom: 0.5rem;
-      color: var(--text-primary);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+      color: var(--text-primary);颜色:var(——text-primary   本,本;text-primary);
     }
-
     .post-meta {
       font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.8rem;
-      display: flex;
+      color: var(--text-secondary);颜色:var(——text-secondary   本,本;text-secondary);
+      margin-bottom: 0.7rem;
+      display: flex;   显示:flex;
+      flex-wrap: wrap;
       gap: 1.2rem;
+      font-family: var(--font-sans);
     }
-
+    .post-date {
+      font-weight: 500;
+      color: var(--accent);
+    }
     .post-excerpt {
-      color: var(--text-secondary);
+      color: var(--text-secondary);颜色:var(——text-secondary   本,本;text-secondary);
       font-size: 0.98rem;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
-    /* 留言区域 */
-    .guestbook-section {
+    /* 留言板 */
+    .guestbook {
       background: var(--bg-color);
       border-radius: 1.5rem;
-      padding: 1.5rem 1.8rem;
+      padding: 1.6rem 1.8rem;
       transition: background 0.3s;
     }
-
     .section-title {
       font-size: 1.3rem;
       font-weight: 500;
       margin-bottom: 1.2rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      color: var(--text-primary);
+      display: flex;   显示:flex;
+      align-items: center;   对齐项目:中心;
+      gap: 0.4rem;   差距:0.4快速眼动;
+      color: var(--text-primary);颜色:var(——text-primary   本,本;text-primary);
     }
-
     .message-form {
-      display: flex;
+      display: flex;   显示:flex;
       flex-direction: column;
       gap: 0.8rem;
       margin-bottom: 1.5rem;
     }
-
-    .message-input {
-      width: 100%;
-      padding: 0.9rem 1.2rem;
+    .input-row {
+      display: flex;   显示:flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .input-field {
+      flex: 1 1 200px;
+      padding: 0.8rem 1.2rem;
       border-radius: 2.5rem;
       border: 1px solid var(--border);
       background: var(--surface);
       font-family: inherit;
-      resize: vertical;
       transition: 0.2s;
-      color: var(--text-primary);
+      color: var(--text-primary);颜色:var(——text-primary   本,本;text-primary);
     }
-
-    .message-input:focus {
+    .textarea-field {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: 1.2rem;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      font-family: inherit;
+      resize: vertical;
+      min-height: 70px;
+      transition: 0.2s;
+      color: var(--text-primary);颜色:var(——text-primary   本,本;text-primary);
+    }
+    .input-field:focus, .textarea-field:focus {
       outline: none;
       border-color: var(--accent);
       box-shadow: 0 0 0 3px rgba(200,149,108,0.2);
     }
-
     .btn {
       background: var(--accent);
       border: none;
       color: white;
-      padding: 0.7rem 1.8rem;
+      padding: 0.7rem 2rem;
       border-radius: 2.5rem;
       font-weight: 500;
       cursor: pointer;
@@ -274,49 +294,53 @@
       font-size: 0.95rem;
       letter-spacing: 0.5px;
       box-shadow: 0 4px 10px rgba(200,149,108,0.3);
+      font-family: var(--font-sans);
     }
-
     .btn:hover {
-      background: #b77f58;
+      background: #b07a55;
       box-shadow: 0 6px 14px rgba(180, 120, 70, 0.4);
     }
-
     .messages-list {
-      display: flex;
+      display: flex;   显示:flex;
       flex-direction: column;
-      gap: 1rem;
-      max-height: 240px;
+      gap: 0.8rem;
+      max-height: 260px;
       overflow-y: auto;
       padding-right: 0.3rem;
+      margin-bottom: 0.5rem;
     }
-
     .message-item {
       background: var(--surface);
-      border-radius: 1.2rem;
+      border-radius: 1rem;
       padding: 0.8rem 1.2rem;
-      font-size: 0.95rem;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
       border: 1px solid var(--border);
-      display: flex;
+      display: flex;   显示:flex;
       flex-direction: column;
+      gap: 0.2rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
-
-    .message-author {
+    .msg-author {
       font-weight: 600;
       color: var(--accent);
       font-size: 0.85rem;
+      font-family: var(--font-sans);
     }
-
-    .message-text {
-      color: var(--text-primary);
-      margin-top: 0.2rem;
+    .msg-text {
+      color: var(--text-primary);颜色:var(——text-primary   本,本;text-primary);
+      font-size: 0.95rem;
     }
-
+    .empty-message {
+      text-align: center;
+      color: var(--text-secondary);颜色:var(——text-secondary   本,本;text-secondary);
+      opacity: 0.7;
+      padding: 1rem;
+      font-style: italic;   字体样式:斜体;
+    }
     .footer-note {
       text-align: center;
-      color: var(--text-secondary);
+      color: var(--text-secondary);颜色:var(——text-secondary   本,本;text-secondary);
       font-size: 0.85rem;
-      margin-top: 1rem;
+      margin-top: 0.8rem;
       opacity: 0.8;
     }
 
@@ -325,307 +349,296 @@
       margin: 0.5rem 0 1rem;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
       body {
-        padding: 1rem 0.8rem;
+        padding: 1rem 0.6rem;
       }
       .blog-container {
         padding: 1.8rem 1.2rem;
+        border-radius: 2rem;
       }
-      .settings-row {
-        gap: 0.8rem;
+      .author-name {
+        font-size: 2.2rem;
+      }
+      .settings-panel {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .input-row {
+        flex-direction: column;
       }
     }
-  </style>
-</head>
-<body>
-  <div class="blog-container" id="blogContainer">
+  </   & lt   & lt;;style   风格>
+</head>   < / head   头>
+<body>   < body   身体>
+  <div class   类="blog-container">
     
-    <!-- 头部：作者名 + 个性签名 -->
-    <header class="blog-header">
-      <div class="author-section">
-        <h1>muxue</h1>
-        <div class="subtitle">山间清风 · 纸上日月</div>
-      </div>
-      <div class="nav-tags">
-        <span class="tag">📖 随笔</span>
-        <span class="tag">🌿 自然</span>
-        <span class="tag">📷 摄影</span>
-        <span class="tag">☕ 日常</span>
-      </div>
-    </header>
+    <!-- 头部 -->
+    <header class   类="blog-header">
+      <div class   类="author-block">
+        <div class   类="author-name">
+          muxue
+          <span class   类="live-datetime" id="liveDateTime">加载中…</span   跨度>
+        </   & lt;div>   < / div>
+        <div class   类="subtitle">山间清风 · 纸上日月</div>
+      </   & lt;div>
+      <div class   类="nav-tags">
+        <span class   类="tag">📖 随笔</span   跨度>
+        <span class   类="tag">🌿 自然</span   跨度>
+        <span class   类="tag">📷 摄影</span   跨度>
+        <span class   类="tag">☕ 日常</span   跨度>
+      </   & lt;div>
+    </header>   & lt; / header>
 
-    <!-- 设置行：更换背景 + 主题颜色 -->
-    <div class="settings-row">
-      <div class="bg-switcher">
-        <span style="color: var(--text-secondary); font-size:0.9rem;">🎨 背景</span>
-        <button class="bg-btn active-bg" data-bg="fdf8f2" style="background: #fdf8f2;" title="暖白"></button>
-        <button class="bg-btn" data-bg="f2f0e9" style="background: #f2f0e9;" title="米灰"></button>
-        <button class="bg-btn" data-bg="e8f0f2" style="background: #e8f0f2;" title="雾蓝"></button>
-        <button class="bg-btn" data-bg="f5f0e7" style="background: #f5f0e7;" title="亚麻"></button>
-      </div>
-      <div class="theme-color-input">
-        <label for="accentPicker">🔸 主题色</label>
-        <input type="color" id="accentPicker" value="#c8956c" title="选择主题色">
-      </div>
-    </div>
+    <!-- 设置面板 -->
+    <div class   类="settings-panel">
+      <div class   类="bg-group">
+        <span class   类="bg-label">🎨 更换背景</span   跨度>
+        <button class   类="bg-btn active-bg" data-bg="fdf8f2" style   风格="background:#fdf8f2;" title   标题="暖白"></button>
+        <button class   类="bg-btn" data-bg="f2f0e9" style   风格="background:#f2f0e9;" title   标题="米灰"></button>
+        <button class   类="bg-btn" data-bg="e8f0f2" style   风格="background:#e8f0f2;" title   标题="雾蓝"></button>
+        <button class   类="bg-btn" data-bg="f5f0e7" style   风格="background:#f5f0e7;" title   标题="亚麻"></button>
+      </   & lt;div>
+      <div class   类="theme-group">
+        <label for="accentPicker" class   类="theme-label">🔸 主题色</label>
+        <input type   类型="color" id="accentPicker" value   价值="#c8956c" class   类="color-input" title   标题="选择主题色">
+      </   & lt;div>
+    </   & lt;div>
 
-    <!-- 文章列表区域（模拟博客文章） -->
-    <section class="post-list">
-      <article class="post-card">
-        <div class="post-title">📝 雨后山行</div>
-        <div class="post-meta"><span>📅 2025-04-10</span><span>🏷️ 自然 · 随笔</span></div>
+    <!-- 文章列表 -->
+    <section class   类="post-list">
+      <article class   类="post-card">
+        <div class   类="post-title">📝 雨后山行</div>
+        <div class="post-meta">
+          <span>📅 <span   跨度   跨度 class   类="post-date">2025-04-10</span   跨度   跨度></span>
+          <span>🏷️ 自然 · 随笔</span>
+        </div>   < / div>
         <p class="post-excerpt">雾从谷底升起，整座山都变得柔软。石阶上的青苔吸饱了水，踩上去仿佛能听见森林的呼吸……</p>
-      </article>
+      </   & lt;article>
       <article class="post-card">
         <div class="post-title">✨ 重构阅读角落</div>
-        <div class="post-meta"><span>📅 2025-04-02</span><span>🏷️ 日常 · 生活</span></div>
+        <div class="post-meta">
+          <span>📅 <span   跨度   跨度 class   类="post-date">2025-04-02</span   跨度   跨度></span>
+          <span>🏷️ 日常 · 生活</span>
+        </div>   < / div>
         <p class="post-excerpt">把旧书架移到窗边，午后光线恰好落在《枕草子》的封面上。一盏茶，几行字，便是最好的休息。</p>
-      </article>
+      </   & lt;article>
       <article class="post-card">
         <div class="post-title">📷 胶片里的春天</div>
-        <div class="post-meta"><span>📅 2025-03-28</span><span>🏷️ 摄影</span></div>
+        <div class="post-meta">
+          <span>📅 <span   跨度   跨度 class   类="post-date">2025-03-28</span   跨度   跨度></span>
+          <span>🏷️ 摄影</   & lt;span>
+        </   & lt;div>   < / div>
         <p class="post-excerpt">用一台老式旁轴相机拍下巷口的玉兰。胶片特有的颗粒感让时光倒流，每一帧都带着温度。</p>
-      </article>
-    </section>
+      </   & lt;article>
+    </   & lt;section>   & lt; / section>
 
-    <!-- 留言板模块 -->
-    <section class="guestbook-section">
+    <!-- 留言板 -->
+    <section class="guestbook">
       <div class="section-title">💬 路过留声 · 留言板</div>
       
       <div class="message-form">
-        <input type="text" id="guestName" class="message-input" placeholder="你的名字 (选填)" maxlength="20" style="width:60%;">
-        <textarea id="guestMessage" class="message-input" rows="2" placeholder="写下想对muxue说的话……" maxlength="200"></textarea>
+        <div class="input-row">
+          <input type="text" id="guestName" class="input-field" placeholder="你的名字 (选填)" maxlength="20">
+        </div>   < / div>
+        <textarea id="guestMessage" class="textarea-field" placeholder="写下想对 muxue 说的话……" maxlength="300"></textarea>
         <button class="btn" id="submitMessage">🌸 留下足迹</button>
-      </div>
+      </   & lt;div>
       
-      <div class="messages-list" id="messagesContainer">
-        <!-- 动态留言会插入这里，同时保留几条预设留言展示 -->
-      </div>
+      <div class="messages-list" id="messagesContainer"></div>
       <div class="footer-note">✉️ 每一句留言都是山间的回音</div>
-    </section>
-    
+    </section>   & lt; / section>
+
     <hr>
-    <footer style="text-align: center; color: var(--text-secondary); font-size:0.9rem;">
+    <footer style="text-align:center; color:var(--text-secondary); font-size:0.9rem;">
       © 2025 muxue · 构建于山野之间
-    </footer>
-  </div>
+    </   & lt;footer>   < / footer>
+  </   & lt;div>
 
   <script>
     (function() {
-      // ----- 获取DOM元素 -----
-      const body = document.body;
-      const blogContainer = document.getElementById('blogContainer');
-      const bgButtons = document.querySelectorAll('.bg-btn');
-      const accentPicker = document.getElementById('accentPicker');
-      const submitBtn = document.getElementById('submitMessage');
-      const guestNameInput = document.getElementById('guestName');
-      const guestMessageInput = document.getElementById('guestMessage');
-      const messagesContainer = document.getElementById('messagesContainer');
+      // ---------- 实时日期时间 ----------
+      function updateDateTime() {
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = String(now.getMonth() + 1).padStart(2, '0');
+        const d = String(now.getDate()).padStart(2, '0');
+        const hh = String(now.getHours()).padStart(2, '0');
+        const mm = String(now.getMinutes()).padStart(2, '0');
+        const ss = String(now.getSeconds()).padStart(2, '0');
+        
+        const dateStr = `${y}-${m}-${d}`;
+        const timeStr = `${hh}:${mm}:${ss}`;
+        const fullStr = `${dateStr} ${timeStr}`;
+        
+        // 更新头部实时时钟
+        const liveEl = document.getElementById('liveDateTime');
+        if (liveEl) liveEl.textContent = fullStr;
+        
+        // 更新所有文章日期
+        document.querySelectorAll('.post-date').forEach(el => {
+          el.textContent = dateStr;
+        });
+      }
+      updateDateTime();
+      setInterval(updateDateTime, 1000);
 
-      // ----- 预设留言 (展示用) -----
+      // ---------- 背景切换 ----------
+      const body = document.body;   Const    常量body = document   文档.body；   身体;
+      const bgButtons = document.querySelectorAll('.bg-btn');const   常量 bgButtons = document   文档.querySelectorAll('.bg-btn')；
+      
+      function setActiveBgButton(bgValue) {
+        bgButtons.forEach(btn => {   bgButtons .“Btn =>{”
+          const val = btn.getAttribute('data-bg');
+          btn.classList.toggle('active-bg', val === bgValue);
+        });
+      }
+      
+      function changeBackground(hex) {
+        if (!hex) return;
+        body.style.backgroundColor = `#${hex}`;
+        document.documentElement.style.setProperty('--bg-color', `#${hex}`);
+        localStorage.setItem('muxue_bg', hex);
+        setActiveBgButton(hex);
+      }
+      
+      // 初始化背景
+      const savedBg = localStorage.getItem('muxue_bg') || 'fdf8f2';
+      changeBackground(savedBg);
+      
+      bgButtons.forEach(btn => {   bgButtons .“Btn =>{”
+        btn.addEventListener('click', () => {
+          const bg = btn.getAttribute('data-bg');
+          if (bg) changeBackground(bg);if   如果 (bg) changeBackground(bg)；
+        });
+      });
+
+      // ---------- 主题色设置 ----------
+      const accentPicker = document.getElementById('accentPicker');const   常量 accentPicker =文档。
+      function applyAccent(color) {函数applyAccent(color   颜色) {
+        document.documentElement.style.setProperty('--accent', color);document   文档.documentElement.style。setProperty(“——口音”,颜色);
+        document.documentElement.style.setProperty('--accent-soft', color + '40');document   文档.documentElement.style。setProperty（‘——accent-soft’， color '40'）；
+        localStorage.setItem('muxue_accent', color);localStorage。setItem (muxue_accent,颜色);
+        if (accentPicker) accentPicker.value = color;if   如果 （accentPicker）。Value = color；
+      }
+      
+      const savedAccent = localStorage.getItem('muxue_accent') || '#c8956c';const   常量 savedAccent = localStorage。getItem('muxue_accent') || '#c8956c'；
+      applyAccent(savedAccent);
+      
+      if (accentPicker) {
+        accentPicker.addEventListener('input', (e) => applyAccent(e.target.value));accentPicker。addEventListener('input'   “输入”, (e) => applyAccent(e.target   目标.value   价值))；
+      }
+
+      // ---------- 留言板功能 ----------
+      const guestName = document.getElementById('guestName');const   常量 guestName = document   文档.getElementById('guestName')；
+      const guestMsg = document.getElementById('guestMessage');const   常量 guestMsg = document   文档.getElementById('guestMessage')；
+      const submitBtn = document.getElementById('submitMessage');const   常量 submitBtn = document   文档.getElementById('submitMessage')；
+      const msgContainer = document.getElementById('messagesContainer');
+      
+      // 预设留言
       const defaultMessages = [
         { author: '山友·青岚', text: '喜欢你的文字，安静又有力量。' },
         { author: '过客·林', text: '偶然走进这里，像发现了一片秘密森林。' },
         { author: 'muxue', text: '欢迎每一位路过的朋友，愿此处让你慢下来。' }
       ];
-
-      // ----- 初始化留言渲染 -----
-      function renderMessages(messagesArray) {
-        if (!messagesContainer) return;
-        messagesContainer.innerHTML = '';
-        messagesArray.forEach(msg => {
-          const msgDiv = document.createElement('div');
-          msgDiv.className = 'message-item';
-          msgDiv.innerHTML = `
-            <span class="message-author">${escapeHTML(msg.author) || '匿名旅人'}</span>
-            <span class="message-text">${escapeHTML(msg.text)}</span>
-          `;
-          messagesContainer.appendChild(msgDiv);
-        });
+      
+      function escapeHTML(str) {   函数escapeHTML(str) {
+        return String(str)   返回字符串(str)
+          .replace(/&/g, '&amp;')   .replace (/, / g, amp;).replace（/&/g, '&'）。替换（/,/ g, amp;）
+          .replace(/</g, '&lt;')   .replace (/ & lt; / g,“和lt;”)
+          .replace(/>/g, '&gt;')   .replace(/在/ g,“和gt;”)
+          .replace(/"/g, '&quot;')   .replace (/, / g,“和“”)
+          .replace(/'/g, '&#039;');   ．替换(/ / g,, # 039;”);
       }
-
-      // 简单的转义防止XSS
-      function escapeHTML(str) {
-        return String(str)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#039;');
-      }
-
-      // 加载留言（从localStorage读取，若无则使用默认）
-      function loadMessages() {
-        const stored = localStorage.getItem('muxue_blog_messages');
-        if (stored) {
-          try {
-            const parsed = JSON.parse(stored);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-              renderMessages(parsed);
-              return;
-            }
-          } catch (e) {}
+      
+      function renderMessages(list) {renderMessages(list   列表) {
+        if (!msgContainer) return;   如果(!msgContainer)返回;
+        if (!list || list.length === 0) {如果(!列出||列表。长度=== 0){
+          msgContainer.innerHTML = '<div class="empty-message">✨ 还没有留言，来做第一个有缘人吧</div>';msgContainer.innerHTML = '<div class="empty-message">✨ 还没有留言，来做第一个有缘人吧</div>';
+          return;   返回;
         }
-        // 默认留言
-        renderMessages(defaultMessages);
-        localStorage.setItem('muxue_blog_messages', JSON.stringify(defaultMessages));
+        msgContainer.innerHTML = list.map(msg => `msgContainer。innerHTML = list。Map （msg => '）
+          <div class="message-item"><div class="message-item">
+            <span class="msg-author">${escapeHTML(msg.author || '匿名旅人')}</span><span class="msg-author">${escapeHTML(msg   味精.author   作者 || '匿名旅人')}</span>
+            <span class="msg-text">${escapeHTML(msg.text   文本)}</span><战事经济舱= " msg-text" > $ {escapeHTML——msg.text < / span>
+          </div>   < / div>
+        `).join('');   ”). join ();
       }
-
-      // 保存留言到localStorage
-      function saveMessages(messagesArray) {
-        localStorage.setItem('muxue_blog_messages', JSON.stringify(messagesArray));
-      }
-
-      // 获取当前留言数组
-      function getCurrentMessages() {
-        const stored = localStorage.getItem('muxue_blog_messages');
-        if (stored) {
-          try {
-            const arr = JSON.parse(stored);
-            return Array.isArray(arr) ? arr : [];
-          } catch (e) {}
+      
+      function loadMessages() {   loadMessages() {loadMessages() {loadMessages() {
+        const stored = localStorage.getItem('muxue_msgs');const   常量 stored = localStorage.getItem('muxue_msgs')；const stored   存储 = localStorage.getItem('muxue_msgs')；= localStorage.getItem('muxue_msgs')；
+        let messages = [];   让消息= []；
+        if (stored) {   If（存储）{
+          try {   尝试{
+            messages = JSON.parse(stored);messages = JSON.parse（已存储）；
+            if (!Array.isArray(messages)) messages = [];if   如果 (!Array.isArray(messages)) messages = []；if (!Array.isArray(messages   消息)) messages   消息 = []；如果数组. isarray (messages   消息)) messages   消息 = []；
+          } catch (e) { messages = []; }   } catch (e) {messages = []；}} catch   抓 (e) {messages   消息 = []；}} catch   抓 (e){消息= [];}
         }
-        return [...defaultMessages];
+        if (messages.length === 0) {   如果消息。长度=== 0){
+          messages = [...defaultMessages];messages =[…defaultMessages];messages   消息 =[…defaultMessages   … defaultMessages];消息= [… defaultMessages];
+          localStorage.setItem('muxue_msgs', JSON.stringify(messages));localStorage。setItem(’muxue_msgs’JSON.stringify消息());localStorage.setItem('muxue_msgs', JSON.stringify(messages   消息));localStorage。setItem(’muxue_msgs’JSON   ’ muxue_msgs&rsquo JSON.stringify消息());
+        }
+        renderMessages(messages);renderMessages(消息);
+        return messages;   返回消息;
       }
-
-      // 添加新留言
-      function addMessage(author, text) {
-        if (!text.trim()) return;
-        const currentMessages = getCurrentMessages();
-        const newMsg = {
+      
+      function saveMessages(msgs) {saveMessages(msgs) {saveMessages(msgs   公司) {saveMessages(msgs   公司) {
+        localStorage.setItem('muxue_msgs', JSON.stringify(msgs));
+      }
+      
+      function addMessage(author, text) {addMessage（作者，文本）{
+        if (!text.trim()) return false;If （!text   文本.trim   修剪()）返回false；
+        const current = loadMessages();const   常量   当前的 current      当前的当前的 = loadMessages()；
+        current.push({
           author: author.trim() || '匿名旅人',
-          text: text.trim()
-        };
-        currentMessages.push(newMsg);
-        // 保留最近30条防止过多
-        const updated = currentMessages.slice(-30);
-        saveMessages(updated);
-        renderMessages(updated);
-      }
-
-      // ----- 背景切换功能 -----
-      function setActiveBackgroundButton(bgValue) {
-        bgButtons.forEach(btn => {
-          const btnBg = btn.getAttribute('data-bg');
-          if (btnBg === bgValue) {
-            btn.classList.add('active-bg');
-          } else {
-            btn.classList.remove('active-bg');
-          }
+          text: text.trim()   文本:text.trim ()
         });
+        // 保留最近50条
+        const updated = current.slice(-50);Const    常量updated = current.slice(-50)；
+        saveMessages(updated);   saveMessages(更新);
+        renderMessages(updated);   renderMessages(更新);
+        return true;   返回true;
       }
-
-      function changeBackground(colorHex) {
-        if (!colorHex) return;
-        // 更新body背景色
-        body.style.backgroundColor = `#${colorHex}`;
-        // 同时更新CSS变量--bg-color，使得内部卡片等继承
-        document.documentElement.style.setProperty('--bg-color', `#${colorHex}`);
-        // 存储到本地
-        localStorage.setItem('muxue_bg_color', colorHex);
-        setActiveBackgroundButton(colorHex);
-      }
-
-      // 初始化背景
-      function initBackground() {
-        const savedBg = localStorage.getItem('muxue_bg_color');
-        if (savedBg) {
-          changeBackground(savedBg);
-        } else {
-          // 默认 #fdf8f2
-          changeBackground('fdf8f2');
-        }
-      }
-
-      // 绑定背景按钮事件
-      bgButtons.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          const bg = this.getAttribute('data-bg');
-          if (bg) {
-            changeBackground(bg);
-          }
-        });
-      });
-
-      // ----- 主题颜色设置 (accent) -----
-      function applyAccentColor(colorHex) {
-        if (!colorHex) return;
-        document.documentElement.style.setProperty('--accent', colorHex);
-        // 同时微调软 accent (基于主色变淡，简单处理)
-        // 使用一个较淡版本：通过透明度或混合，此处简单设置一个相关浅色
-        // 为了协调，生成一个柔和版
-        document.documentElement.style.setProperty('--accent-soft', colorHex + '40'); // 大约25%透明度document.documentElement.style.setProperty('--accent-soft', colorHex   '40'); // 大约25%透明度
-        localStorage.setItem('muxue_accent_color', colorHex);localStorage。setItem(’muxue_accent_color’   &rsquo muxue_accent_color’,colorHex);
-        if (accentPicker) {
-          accentPicker.value = colorHex;accentPicker。value = colorHex；   colorHex;
-        }
-      }
-
-      function initAccentColor() {函数initAccentColor() {
-        const savedAccent = localStorage.getItem('muxue_accent_color');const   常量 savedAccent = localStorage.getItem('muxue_accent_color'   “muxue_accent_color”)；
-        if (savedAccent) {
-          applyAccentColor(savedAccent);
-        } else {
-          applyAccentColor('#c8956c');applyAccentColor(“# c8956c”);
-        }
-      }
-
-      if (accentPicker) {
-        accentPicker.addEventListener('input', function(e) {accentPicker。addEventListener('input'   “输入”, function   函数(e) {
-          const newColor = e.target.value;const   常量 newColor = e.target   目标.value；   价值;
-          applyAccentColor(newColor);
-        });
-      }
-
-      // ----- 留言提交事件 -----
+      
+      // 初始加载
+      loadMessages();
+      
+      // 提交留言
       if (submitBtn) {   如果（submitBtn） {
-        submitBtn.addEventListener('click', function() {submitBtn。addEventListener('click'   “点击”, function   函数() {
-          const name = guestNameInput ? guestNameInput.value : '';const   常量   名字 name      名字名字 = guestNameInput ？guestNameInput。取值："；   “;
-          const message = guestMessageInput ? guestMessageInput.value : '';const   常量   消息 message      消息消息 = guestMessageInput ？guestMessageInput。取值："；   “;
-          if (!message.trim()) {   如果(!消息。削减()){
-            alert('请写下留言内容再提交哦 🌱');
+        submitBtn.addEventListener('click', () => {submitBtn。addEventListener('click'   “点击”, () => {
+          const name = guestName ? guestName.value.trim() : '';const   常量   名字 name      名字名字 = guestName ？guestName.value.trim   修剪(): "；   “;
+          const msg = guestMsg ? guestMsg.value.trim() : '';const   常量 msg = guestMsg ？guestMsg.value.trim   修剪(): "；   “;
+          if (!msg) {   如果(!msg) {
+            alert('请填写留言内容再提交哦 🌱');
             return;   返回;
           }
-          addMessage(name, message);addMessage(名称、消息);
-          // 清空输入框
-          if (guestNameInput) guestNameInput.value = '';如果（guestNameInput） guestNameInput。value = "；   “;
-          if (guestMessageInput) guestMessageInput.value = '';如果（guestMessageInput） guestMessageInput。value = "；   “;
-        });
-      }
-
-      // 支持回车快捷提交（在textarea中按Ctrl+Enter）// 支持回车快捷提交（在textarea中按Ctrl Enter）
-      if (guestMessageInput) {   如果（guestMessageInput） {
-        guestMessageInput.addEventListener('keydown', function(e) {guestMessageInput。addEventListener('keydown'   “keydown”, function   函数(e) {
-          if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {如果((e.ctrlKey | | e.metaKey),和e.key   关键 = = =“输入”){
-            e.preventDefault();
-            submitBtn.click();
+          const success = addMessage(name, msg);const   常量 success = addMessage(name   名字, msg)；
+          if (success) {   If      如果如果 (success) {
+            if (guestName) guestName.value = '';if   如果 (guestName) guestName。Value = "；   “;
+            if (guestMsg) guestMsg.value = '';if   如果 （guestMsg）Value = "；   “;
           }
         });
       }
-
-      // ----- 额外：点击预设背景时存储并同步UI-----
-      // 已经在changeBackground中处理
-
-      // 启动所有
-      initBackground();
-      initAccentColor();
-      loadMessages();
-
-      // 确保容器背景也响应变量 (已通过var设置)
-      // 同时处理主题色切换时，active-bg 状态保持一致
-      // 监听存储事件（多标签页同步可选）
-      window.addEventListener('storage', (e) => {窗口。addEventListener('storage'   “存储”, (e) => {
-        if (e.key === 'muxue_bg_color') {If      如果如果 (e.key   关键 === 'muxue_bg_color'   “muxue_bg_color”) {
-          if (e.newValue) changeBackground(e.newValue);if   如果 (e.newValue) changeBackground(e.newValue)；
-        } else if (e.key === 'muxue_accent_color') {
-          if (e.newValue) applyAccentColor(e.newValue);如果（e.newValue）   newValue) applyAccentColor(e.newValue)；
-        } else if (e.key === 'muxue_blog_messages') {
-          loadMessages();
-        }
+      
+      // Ctrl+Enter 快捷提交   // Ctrl Enter 快捷提交
+      if (guestMsg) {
+        guestMsg.addEventListener('keydown', (e) => {guestMsg。addEventListener('keydown'   “keydown”, (e) => {
+          if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {如果((e.ctrlKey | | e.metaKey),和e.key   关键 = = =“输入”){if   如果 ((e.ctrlKey || e.metaKey) && e.key   关键 === 'Enter'   “进入”) {如果((e.ctrlKey | | e.metaKey),和e.key   关键   关键 = = =“输入”){
+            e.preventDefault();
+            submitBtn && submitBtn.click();submitBtn.click   点击()；
+          }
+        });
+      }
+      
+      // 跨标签页同步
+      window.addEventListener('storage', (e) => {窗口。addEventListener('storage'   “存储”, (e) => {window   窗口.addEventListener('storage'   “存储”, (e) => {窗口。addEventListener('storage'   “存储”   “存储”, (e) => {
+        if (e.key === 'muxue_bg' && e.newValue) changeBackground(e.newValue);if   如果 (e.k eye === 'muxue_bg' && e.newValue) changeBackground(e.newValue)；
+        if (e.key === 'muxue_accent' && e.newValue) applyAccent(e.newValue);if   如果 (e.k key === 'muxue_accent' && e.newValue) applyAccent(e.newValue)；
+        if (e.key === 'muxue_msgs') loadMessages();如果（e.k key   关键 === 'muxue_msgs'） loadMessages()；
       });
 
     })();
-  </script>   < / script>
-</body>   < / body>
-</html>   < / html>
+  </script>   < / script>   </   & lt;script>   < / script></   & lt;script> </   & lt;script> </ & lt;script> <；
+</body>   < / body>   “身体”“身体”
+</html>   < / html>   /html>；
