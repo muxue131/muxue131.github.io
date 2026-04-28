@@ -91,18 +91,6 @@
       font-size: 1.2rem;
     }
 
-    /* 实时日期显示 */
-    .live-date {
-      font-size: 0.9rem;
-      color: var(--accent);
-      background: var(--bg-color);
-      padding: 0.2rem 1rem;
-      border-radius: 2rem;
-      margin-left: 0.8rem;
-      font-weight: 400;
-      transition: background 0.3s, color 0.3s;
-    }
-
     /* 设置面板行 */
     .settings-row {
       display: flex;
@@ -222,8 +210,6 @@
       margin-bottom: 0.8rem;
       display: flex;
       gap: 1.2rem;
-      flex-wrap: wrap;
-      align-items: center;
     }
 
     .post-excerpt {
@@ -355,10 +341,10 @@
 <body>
   <div class="blog-container" id="blogContainer">
     
-    <!-- 头部：作者名 + 个性签名 + 实时日期 -->
+    <!-- 头部：作者名 + 个性签名 -->
     <header class="blog-header">
       <div class="author-section">
-        <h1>muxue <span class="live-date" id="currentDate"></span></h1>
+        <h1>muxue</h1>
         <div class="subtitle">山间清风 · 纸上日月</div>
       </div>
       <div class="nav-tags">
@@ -384,30 +370,21 @@
       </div>
     </div>
 
-    <!-- 文章列表区域（日期动态更新为实时日期） -->
+    <!-- 文章列表区域（模拟博客文章） -->
     <section class="post-list">
       <article class="post-card">
         <div class="post-title">📝 雨后山行</div>
-        <div class="post-meta">
-          <span>📅 <span class="post-date">2025-04-10</span></span>
-          <span>🏷️ 自然 · 随笔</span>
-        </div>
+        <div class="post-meta"><span>📅 2025-04-10</span><span>🏷️ 自然 · 随笔</span></div>
         <p class="post-excerpt">雾从谷底升起，整座山都变得柔软。石阶上的青苔吸饱了水，踩上去仿佛能听见森林的呼吸……</p>
       </article>
       <article class="post-card">
         <div class="post-title">✨ 重构阅读角落</div>
-        <div class="post-meta">
-          <span>📅 <span class="post-date">2025-04-02</span></span>
-          <span>🏷️ 日常 · 生活</span>
-        </div>
+        <div class="post-meta"><span>📅 2025-04-02</span><span>🏷️ 日常 · 生活</span></div>
         <p class="post-excerpt">把旧书架移到窗边，午后光线恰好落在《枕草子》的封面上。一盏茶，几行字，便是最好的休息。</p>
       </article>
       <article class="post-card">
         <div class="post-title">📷 胶片里的春天</div>
-        <div class="post-meta">
-          <span>📅 <span class="post-date">2025-03-28</span></span>
-          <span>🏷️ 摄影</span>
-        </div>
+        <div class="post-meta"><span>📅 2025-03-28</span><span>🏷️ 摄影</span></div>
         <p class="post-excerpt">用一台老式旁轴相机拍下巷口的玉兰。胶片特有的颗粒感让时光倒流，每一帧都带着温度。</p>
       </article>
     </section>
@@ -436,34 +413,6 @@
 
   <script>
     (function() {
-      // ----- 实时日期更新函数 -----
-      function updateAllDates() {
-        const now = new Date();
-        // 格式化日期为 YYYY-MM-DD 格式
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        const todayString = `${year}-${month}-${day}`;
-        
-        // 更新头部显示的日期
-        const dateElement = document.getElementById('currentDate');
-        if (dateElement) {
-          dateElement.textContent = todayString;
-        }
-        
-        // 更新所有文章卡片中的日期
-        const postDates = document.querySelectorAll('.post-date');
-        postDates.forEach(function(span) {
-          span.textContent = todayString;
-        });
-      }
-
-      // 立即执行一次日期更新
-      updateAllDates();
-      
-      // 每隔60秒检查一次日期变化（跨日期自动更新）
-      setInterval(updateAllDates, 60000);
-
       // ----- 获取DOM元素 -----
       const body = document.body;
       const blogContainer = document.getElementById('blogContainer');
@@ -600,10 +549,12 @@
       });
 
       // ----- 主题颜色设置 (accent) -----
-      function applyAccentColor(colorHex) {applyAccentColor(colorHex) {
-        if (!colorHex) return;   如果(!colorHex)返回;
-        document.documentElement.style.setProperty('--accent', colorHex);document   文档.documentElement.style。setProperty('、“accent’colorHex);   '、“accent’colorHex);
+      function applyAccentColor(colorHex) {
+        if (!colorHex) return;
+        document.documentElement.style.setProperty('--accent', colorHex);
         // 同时微调软 accent (基于主色变淡，简单处理)
+        // 使用一个较淡版本：通过透明度或混合，此处简单设置一个相关浅色
+        // 为了协调，生成一个柔和版
         document.documentElement.style.setProperty('--accent-soft', colorHex + '40'); // 大约25%透明度document.documentElement.style.setProperty('--accent-soft', colorHex   '40'); // 大约25%透明度
         localStorage.setItem('muxue_accent_color', colorHex);localStorage。setItem(’muxue_accent_color’   &rsquo muxue_accent_color’,colorHex);
         if (accentPicker) {
@@ -621,8 +572,8 @@
       }
 
       if (accentPicker) {
-        accentPicker.addEventListener('input'   “输入”, function   函数(e) {
-          const newColor = e.target.value;const   常量 newColor = e.target.value；
+        accentPicker.addEventListener('input', function(e) {accentPicker。addEventListener('input'   “输入”, function   函数(e) {
+          const newColor = e.target.value;const   常量 newColor = e.target   目标.value；   价值;
           applyAccentColor(newColor);
         });
       }
@@ -653,14 +604,19 @@
         });
       }
 
-      // 启动所有功能
+      // ----- 额外：点击预设背景时存储并同步UI-----
+      // 已经在changeBackground中处理
+
+      // 启动所有
       initBackground();
       initAccentColor();
       loadMessages();
 
+      // 确保容器背景也响应变量 (已通过var设置)
+      // 同时处理主题色切换时，active-bg 状态保持一致
       // 监听存储事件（多标签页同步可选）
       window.addEventListener('storage', (e) => {窗口。addEventListener('storage'   “存储”, (e) => {
-        if (e.key === 'muxue_bg_color') {If   如果 (e.key   关键 === 'muxue_bg_color'   “muxue_bg_color”) {
+        if (e.key === 'muxue_bg_color') {If      如果如果 (e.key   关键 === 'muxue_bg_color'   “muxue_bg_color”) {
           if (e.newValue) changeBackground(e.newValue);if   如果 (e.newValue) changeBackground(e.newValue)；
         } else if (e.key === 'muxue_accent_color') {
           if (e.newValue) applyAccentColor(e.newValue);如果（e.newValue）   newValue) applyAccentColor(e.newValue)；
@@ -672,4 +628,4 @@
     })();
   </script>   < / script>
 </body>   < / body>
-</   & lt;html>   < / html>
+</html>   < / html>
