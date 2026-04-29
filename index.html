@@ -5,12 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=2.0, minimum-scale=0.5">
   <title>muxue · 山间小记</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
       --bg-color: #fdf8f2;
       --surface: #ffffff;
@@ -19,330 +14,103 @@
       --accent: #c8956c;
       --accent-soft: #e7d7c4;
       --border: #e2d9cd;
-      --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      --font-serif: 'Noto Serif SC', '楷体', 'KaiTi', '华文楷体', Georgia, serif;
-      --font-sans: system-ui, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --shadow: 0 10px 30px rgba(0,0,0,0.05);
+      --font-serif: 'Noto Serif SC', '楷体', 'KaiTi', Georgia, serif;
+      --font-sans: system-ui, 'Segoe UI', 'PingFang SC', sans-serif;
     }
-
     body {
       background-color: var(--bg-color);
       color: var(--text-primary);
       font-family: var(--font-serif);
-      margin: 0;
-      padding: 2rem 1.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      transition: background-color 0.4s;
+      margin: 0; padding: 2rem 1.5rem;
+      display: flex; justify-content: center; align-items: center;
+      min-height: 100vh; transition: background-color 0.4s;
     }
-
     .blog-container {
-      max-width: 920px;
-      width: 100%;
+      max-width: 920px; width: 100%;
       background-color: var(--surface);
-      border-radius: 2.5rem;
-      box-shadow: var(--shadow);
-      padding: 2.5rem 2.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
+      border-radius: 2.5rem; box-shadow: var(--shadow);
+      padding: 2.5rem 2.2rem; display: flex;
+      flex-direction: column; gap: 2rem;
       transition: background-color 0.4s;
     }
-
-    /* 头部 */
     .blog-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: flex-end;
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 1.2rem;
-      gap: 1rem;
-    }
-    .author-block {
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
+      display: flex; flex-wrap: wrap; justify-content: space-between;
+      align-items: flex-end; border-bottom: 1px solid var(--border);
+      padding-bottom: 1.2rem; gap: 1rem;
     }
     .author-name {
-      font-size: 2.8rem;
-      font-weight: 450;
-      letter-spacing: 2px;
-      display: flex;
-      align-items: baseline;
-      flex-wrap: wrap;
-      gap: 0.8rem;
+      font-size: 2.8rem; font-weight: 450; letter-spacing: 2px;
+      display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.8rem;
     }
     .live-datetime {
-      font-size: 0.9rem;
-      font-weight: 400;
-      background: var(--bg-color);
-      color: var(--accent);
-      padding: 0.25rem 1.2rem;
-      border-radius: 2rem;
-      white-space: nowrap;
-      font-family: var(--font-sans);
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      font-size: 0.9rem; background: var(--bg-color); color: var(--accent);
+      padding: 0.25rem 1.2rem; border-radius: 2rem; font-family: var(--font-sans);
+      border: 1px solid var(--border); box-shadow: 0 2px 6px rgba(0,0,0,0.03);
     }
-    .subtitle {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      font-style: italic;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .subtitle::before {
-      content: "🌸";
-      font-style: normal;
-    }
-    .nav-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-    }
+    .subtitle { color: var(--text-secondary); font-style: italic; display: flex; align-items: center; gap: 0.4rem; }
+    .subtitle::before { content: "🌸"; font-style: normal; }
+    .nav-tags { display: flex; flex-wrap: wrap; gap: 0.7rem; }
     .tag {
-      background: var(--bg-color);
-      padding: 0.3rem 1.2rem;
-      border-radius: 2rem;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      border: 1px solid transparent;
-      transition: 0.2s;
-      cursor: default;
+      background: var(--bg-color); padding: 0.3rem 1.2rem; border-radius: 2rem;
+      font-size: 0.9rem; color: var(--text-secondary); border: 1px solid transparent;
+      transition: 0.2s; cursor: default;
     }
-    .tag:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: var(--surface);
-    }
-
-    /* 设置面板 */
+    .tag:hover { border-color: var(--accent); color: var(--accent); background: var(--surface); }
     .settings-panel {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.2rem;
-      background: var(--bg-color);
-      padding: 0.8rem 1.8rem;
-      border-radius: 3rem;
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+      gap: 1.2rem; background: var(--bg-color); padding: 0.8rem 1.8rem; border-radius: 3rem;
     }
-    .bg-group, .theme-group {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      flex-wrap: wrap;
-    }
-    .bg-label, .theme-label {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      font-family: var(--font-sans);
-    }
+    .bg-group, .theme-group { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+    .bg-label, .theme-label { font-size: 0.9rem; color: var(--text-secondary); font-family: var(--font-sans); }
     .bg-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      width: 32px; height: 32px; border-radius: 50%; border: 2px solid transparent;
+      cursor: pointer; transition: 0.2s; box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }
-    .bg-btn:hover {
-      transform: scale(1.12);
-      border-color: var(--accent);
-    }
-    .bg-btn.active-bg {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(200,149,108,0.35);
-    }
-    .color-input {
-      width: 38px;
-      height: 38px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      cursor: pointer;
-      background: transparent;
-      padding: 3px;
-    }
-
-    /* 文章卡片 */
-    .post-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
+    .bg-btn:hover { transform: scale(1.12); border-color: var(--accent); }
+    .bg-btn.active-bg { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,149,108,0.35); }
+    .color-input { width: 38px; height: 38px; border: 1px solid var(--border); border-radius: 10px; cursor: pointer; background: transparent; padding: 3px; }
+    .post-list { display: flex; flex-direction: column; gap: 1.5rem; }
     .post-card {
-      background: var(--bg-color);
-      border-radius: 1.2rem;
-      padding: 1.5rem 1.8rem;
-      border: 1px solid transparent;
-      transition: 0.25s;
+      background: var(--bg-color); border-radius: 1.2rem; padding: 1.5rem 1.8rem;
+      border: 1px solid transparent; transition: 0.25s;
     }
-    .post-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
-      border-color: var(--accent-soft);
-    }
-    .post-title {
-      font-size: 1.5rem;
-      font-weight: 500;
-      margin-bottom: 0.4rem;
-    }
-    .post-meta {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.6rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      font-family: var(--font-sans);
-    }
-    .post-date {
-      font-weight: 500;
-      color: var(--accent);
-    }
-    .post-excerpt {
-      color: var(--text-secondary);
-      font-size: 0.98rem;
-      line-height: 1.6;
-    }
-
-    /* 留言板 */
-    .guestbook {
-      background: var(--bg-color);
-      border-radius: 1.5rem;
-      padding: 1.6rem 1.8rem;
-    }
-    .section-title {
-      font-size: 1.3rem;
-      font-weight: 500;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-    }
-    .message-form {
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-      margin-bottom: 1.2rem;
-    }
-    .input-row {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-    }
+    .post-card:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.06); border-color: var(--accent-soft); }
+    .post-title { font-size: 1.5rem; font-weight: 500; margin-bottom: 0.4rem; }
+    .post-meta { font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 0.6rem; display: flex; flex-wrap: wrap; gap: 1rem; font-family: var(--font-sans); }
+    .post-date { font-weight: 500; color: var(--accent); }
+    .post-excerpt { color: var(--text-secondary); font-size: 0.98rem; line-height: 1.6; }
+    .guestbook { background: var(--bg-color); border-radius: 1.5rem; padding: 1.6rem 1.8rem; }
+    .section-title { font-size: 1.3rem; font-weight: 500; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.4rem; }
+    .message-form { display: flex; flex-direction: column; gap: 0.7rem; margin-bottom: 1.2rem; }
+    .input-row { display: flex; gap: 0.8rem; flex-wrap: wrap; }
     .input-field, .textarea-field {
-      padding: 0.8rem 1.2rem;
-      border-radius: 2rem;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      font-family: inherit;
-      transition: 0.2s;
-      color: var(--text-primary);
+      padding: 0.8rem 1.2rem; border-radius: 2rem; border: 1px solid var(--border);
+      background: var(--surface); font-family: inherit; transition: 0.2s; color: var(--text-primary);
     }
-    .textarea-field {
-      border-radius: 1.2rem;
-      resize: vertical;
-      min-height: 70px;
-      width: 100%;
-    }
-    .input-field:focus, .textarea-field:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(200,149,108,0.2);
-    }
+    .textarea-field { border-radius: 1.2rem; resize: vertical; min-height: 70px; width: 100%; }
+    .input-field:focus, .textarea-field:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(200,149,108,0.2); }
     .btn {
-      background: var(--accent);
-      border: none;
-      color: white;
-      padding: 0.7rem 1.8rem;
-      border-radius: 2.5rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.2s;
-      font-size: 0.95rem;
-      box-shadow: 0 4px 10px rgba(200,149,108,0.3);
-      font-family: var(--font-sans);
+      background: var(--accent); border: none; color: white; padding: 0.7rem 1.8rem;
+      border-radius: 2.5rem; font-weight: 500; cursor: pointer; transition: 0.2s;
+      font-size: 0.95rem; box-shadow: 0 4px 10px rgba(200,149,108,0.3); font-family: var(--font-sans);
     }
-    .btn:hover {
-      background: #b07a55;
-      box-shadow: 0 6px 14px rgba(180,120,70,0.4);
-    }
-    .btn-outline {
-      background: transparent;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      box-shadow: none;
-      padding: 0.5rem 1.4rem;
-      font-size: 0.85rem;
-    }
-    .btn-outline:hover {
-      background: var(--accent);
-      color: white;
-      box-shadow: 0 4px 10px rgba(200,149,108,0.2);
-    }
-    .action-bar {
-      display: flex;
-      gap: 0.8rem;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-    .messages-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.8rem;
-      max-height: 300px;
-      overflow-y: auto;
-      padding-right: 0.2rem;
-    }
-    .message-item {
-      background: var(--surface);
-      border-radius: 1rem;
-      padding: 0.8rem 1.2rem;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-    }
-    .msg-author {
-      font-weight: 600;
-      color: var(--accent);
-      font-size: 0.85rem;
-      font-family: var(--font-sans);
-    }
-    .msg-text {
-      color: var(--text-primary);
-      font-size: 0.95rem;
-    }
-    .empty-msg {
-      text-align: center;
-      color: var(--text-secondary);
-      opacity: 0.7;
-      padding: 1rem;
-      font-style: italic;
-    }
-    hr {
-      border: 0.5px solid var(--border);
-      margin: 0.5rem 0;
-    }
+    .btn:hover { background: #b07a55; box-shadow: 0 6px 14px rgba(180,120,70,0.4); }
+    .btn-outline { background: transparent; color: var(--accent); border: 1px solid var(--accent); box-shadow: none; padding: 0.5rem 1.4rem; font-size: 0.85rem; }
+    .btn-outline:hover { background: var(--accent); color: white; }
+    .action-bar { display: flex; gap: 0.8rem; flex-wrap: wrap; align-items: center; margin-bottom: 1rem; }
+    .sync-tip { font-size: 0.8rem; color: var(--text-secondary); margin-left: auto; display: flex; align-items: center; gap: 0.3rem; }
+    .messages-list { display: flex; flex-direction: column; gap: 0.8rem; max-height: 300px; overflow-y: auto; padding-right: 0.2rem; }
+    .message-item { background: var(--surface); border-radius: 1rem; padding: 0.8rem 1.2rem; border: 1px solid var(--border); box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
+    .msg-author { font-weight: 600; color: var(--accent); font-size: 0.85rem; font-family: var(--font-sans); }
+    .msg-text { color: var(--text-primary); font-size: 0.95rem; }
+    .empty-msg { text-align: center; color: var(--text-secondary); opacity: 0.7; padding: 1rem; font-style: italic; }
+    hr { border: 0.5px solid var(--border); margin: 0.5rem 0; }
     @media (max-width: 650px) {
-      body {
-        padding: 1rem 0.6rem;
-      }
-      .blog-container {
-        padding: 1.5rem 1rem;
-      }
-      .author-name {
-        font-size: 2.2rem;
-      }
-      .settings-panel {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.8rem;
-      }
+      body { padding: 1rem 0.6rem; }
+      .blog-container { padding: 1.5rem 1rem; }
+      .author-name { font-size: 2.2rem; }
+      .settings-panel { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
     }
   </style>
 </head>
@@ -351,10 +119,7 @@
     <!-- 头部 -->
     <header class="blog-header">
       <div class="author-block">
-        <div class="author-name">
-          muxue
-          <span class="live-datetime" id="liveDateTime">加载中…</span>
-        </div>
+        <div class="author-name">muxue <span class="live-datetime" id="liveDateTime">加载中…</span></div>
         <div class="subtitle">山间清风 · 纸上日月</div>
       </div>
       <div class="nav-tags">
@@ -402,7 +167,6 @@
     <!-- 留言板 -->
     <section class="guestbook">
       <div class="section-title">💬 路过留声 · 留言板</div>
-      
       <div class="message-form">
         <div class="input-row">
           <input type="text" id="guestName" class="input-field" placeholder="你的名字 (选填)" maxlength="20" style="flex:1;">
@@ -410,17 +174,15 @@
         <textarea id="guestMessage" class="textarea-field" placeholder="写下想对 muxue 说的话……" maxlength="300"></textarea>
         <div style="display: flex; gap: 0.8rem; align-items: center; flex-wrap: wrap;">
           <button class="btn" id="submitMessage">🌸 留下足迹</button>
-          <span style="font-size:0.8rem; color:var(--text-secondary);">Ctrl+Enter 快捷发送</span>
+          <span class="sync-tip" id="syncStatus">🔄 多标签页实时同步中</span>
         </div>
       </div>
-
       <div class="action-bar">
         <button class="btn btn-outline" id="exportMessages">📥 导出留言</button>
         <button class="btn btn-outline" id="importMessages">📤 导入留言</button>
         <input type="file" id="importFile" accept=".json" style="display:none;">
-        <span style="font-size:0.8rem; color:var(--text-secondary); margin-left:auto;">💾 备份即永久保存</span>
+        <span class="sync-tip">💡 不同设备？导出后分享给朋友导入即可</span>
       </div>
-
       <div class="messages-list" id="messagesContainer"></div>
       <div style="text-align:center; color:var(--text-secondary); font-size:0.85rem; margin-top:0.8rem; opacity:0.8;">
         ✉️ 每一句留言都是山间的回音
@@ -445,28 +207,18 @@
         const mm = String(now.getMinutes()).padStart(2, '0');
         const ss = String(now.getSeconds()).padStart(2, '0');
         const dateStr = `${y}-${m}-${d}`;
-        const timeStr = `${hh}:${mm}:${ss}`;
-        
         const liveEl = document.getElementById('liveDateTime');
-        if (liveEl) liveEl.textContent = `${dateStr} ${timeStr}`;
-        
-        document.querySelectorAll('.post-date').forEach(el => {
-          el.textContent = dateStr;
-        });
+        if (liveEl) liveEl.textContent = `${dateStr} ${hh}:${mm}:${ss}`;
+        document.querySelectorAll('.post-date').forEach(el => el.textContent = dateStr);
       }
       updateDateTime();
       setInterval(updateDateTime, 1000);
 
-      // ---------- 背景切换 ----------
+      // ---------- 背景/主题 ----------
       const body = document.body;
       const bgButtons = document.querySelectorAll('.bg-btn');
-      function setActiveBgButton(bgValue) {
-        bgButtons.forEach(btn => {
-          btn.classList.toggle('active-bg', btn.dataset.bg === bgValue);
-        });
-      }
+      function setActiveBgButton(bg) { bgButtons.forEach(b => b.classList.toggle('active-bg', b.dataset.bg === bg)); }
       function changeBackground(hex) {
-        if (!hex) return;
         body.style.backgroundColor = `#${hex}`;
         document.documentElement.style.setProperty('--bg-color', `#${hex}`);
         localStorage.setItem('muxue_bg', hex);
@@ -476,7 +228,6 @@
       changeBackground(savedBg);
       bgButtons.forEach(btn => btn.addEventListener('click', () => changeBackground(btn.dataset.bg)));
 
-      // ---------- 主题色 ----------
       const accentPicker = document.getElementById('accentPicker');
       function applyAccent(color) {
         document.documentElement.style.setProperty('--accent', color);
@@ -484,11 +235,10 @@
         localStorage.setItem('muxue_accent', color);
         if (accentPicker) accentPicker.value = color;
       }
-      const savedAccent = localStorage.getItem('muxue_accent') || '#c8956c';
-      applyAccent(savedAccent);
-      if (accentPicker) accentPicker.addEventListener('input', e => applyAccent(e.target.value));
+      applyAccent(localStorage.getItem('muxue_accent') || '#c8956c');
+      accentPicker?.addEventListener('input', e => applyAccent(e.target.value));
 
-      // ---------- 留言核心 (持久化 + 导入导出) ----------
+      // ---------- 留言系统 (localStorage + BroadcastChannel) ----------
       const STORAGE_KEY = 'muxue_guestbook_messages';
       const guestName = document.getElementById('guestName');
       const guestMsg = document.getElementById('guestMessage');
@@ -497,8 +247,8 @@
       const exportBtn = document.getElementById('exportMessages');
       const importBtn = document.getElementById('importMessages');
       const importFile = document.getElementById('importFile');
+      const syncStatus = document.getElementById('syncStatus');
 
-      // 默认示例留言
       const defaultMessages = [
         { author: '山友·青岚', text: '喜欢你的文字，安静又有力量。' },
         { author: '过客·林', text: '偶然走进这里，像发现了一片秘密森林。' },
@@ -509,34 +259,27 @@
         return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
       }
 
-      // 从 localStorage 读取留言数组 (不做自动重置，保持纯净)
-      function loadMessagesFromStorage() {
+      function loadMessages() {
         const stored = localStorage.getItem(STORAGE_KEY);
         if (stored) {
-          try {
-            const arr = JSON.parse(stored);
-            if (Array.isArray(arr)) return arr;
-          } catch (e) {}
+          try { return JSON.parse(stored); } catch(e) {}
         }
-        // 首次使用存入默认留言
         const init = [...defaultMessages];
         localStorage.setItem(STORAGE_KEY, JSON.stringify(init));
         return init;
       }
 
-      // 保存留言到 localStorage
-      function saveMessagesToStorage(messages) {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+      function saveMessages(msgs) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(msgs));
       }
 
-      // 渲染留言列表
-      function renderMessages(messages) {
+      function renderMessages(msgs) {
         if (!msgContainer) return;
-        if (!messages || messages.length === 0) {
+        if (!msgs || msgs.length === 0) {
           msgContainer.innerHTML = '<div class="empty-msg">✨ 还没有留言，来做第一个有缘人吧</div>';
           return;
         }
-        msgContainer.innerHTML = messages.map(msg => `
+        msgContainer.innerHTML = msgs.map(msg => `
           <div class="message-item">
             <div class="msg-author">${escapeHTML(msg.author || '匿名旅人')}</div>
             <div class="msg-text">${escapeHTML(msg.text)}</div>
@@ -544,107 +287,106 @@
         `).join('');
       }
 
-      // 获取当前留言并渲染
       function refreshMessages() {
-        const msgs = loadMessagesFromStorage();
+        const msgs = loadMessages();
         renderMessages(msgs);
         return msgs;
       }
 
-      // 添加新留言
+      // 使用 BroadcastChannel 实现多标签页实时同步
+      const channel = new BroadcastChannel('muxue_guestbook_channel');
+      channel.onmessage = (event) => {
+        if (event.data && event.data.type === 'MESSAGES_UPDATED') {
+          refreshMessages();
+          if (syncStatus) {
+            syncStatus.textContent = '✅ 已同步其他标签页的留言';
+            setTimeout(() => { syncStatus.textContent = '🔄 多标签页实时同步中'; }, 2000);
+          }
+        }
+      };
+
+      function broadcastUpdate() {
+        channel.postMessage({ type: 'MESSAGES_UPDATED' });
+      }
+
       function addMessage(author, text) {
         if (!text.trim()) return false;
-        const msgs = loadMessagesFromStorage();
-        msgs.push({
-          author: author.trim() || '匿名旅人',
-          text: text.trim()
-        });
-        // 保留最近100条
+        const msgs = loadMessages();
+        msgs.push({ author: author.trim() || '匿名旅人', text: text.trim() });
         const trimmed = msgs.slice(-100);
-        saveMessagesToStorage(trimmed);
+        saveMessages(trimmed);
         renderMessages(trimmed);
+        broadcastUpdate(); // 通知其他标签页
         return true;
       }
 
-      // 提交事件
-      if (submitBtn) {
-        submitBtn.addEventListener('click', () => {
-          const name = guestName ? guestName.value.trim() : '';
-          const msg = guestMsg ? guestMsg.value.trim() : '';
-          if (!msg) {
-            alert('请填写留言内容 🌱');
-            return;
-          }
-          addMessage(name, msg);
-          if (guestName) guestName.value = '';
-          if (guestMsg) guestMsg.value = '';
-        });
-      }
-
-      if (guestMsg) {
-        guestMsg.addEventListener('keydown', (e) => {
-          if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
-            e.preventDefault();
-            submitBtn.click();
-          }
-        });
-      }
-
-      // 导出留言为 JSON 文件
-      if (exportBtn) {
-        exportBtn.addEventListener('click', () => {
-          const msgs = loadMessagesFromStorage();
-          const blob = new Blob([JSON.stringify(msgs, null, 2)], { type: 'application/json' });
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `muxue_留言备份_${new Date().toISOString().slice(0,10)}.json`;
-          a.click();
-          URL.revokeObjectURL(url);
-        });
-      }
-
-      // 导入留言 (合并而非覆盖)
-      if (importBtn && importFile) {
-        importBtn.addEventListener('click', () => importFile.click());
-        importFile.addEventListener('change', (event) => {
-          const file = event.target.files[0];
-          if (!file) return;
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            try {
-              const imported = JSON.parse(e.target.result);
-              if (!Array.isArray(imported)) throw new Error('格式错误');
-              const current = loadMessagesFromStorage();
-              // 合并去重 (简单根据文本+作者判断)
-              const merged = [...current];
-              imported.forEach(item => {
-                if (item && item.text && !merged.some(m => m.author === item.author && m.text === item.text)) {
-                  merged.push({ author: item.author || '匿名', text: item.text });
-                }
-              });
-              saveMessagesToStorage(merged.slice(-100));
-              refreshMessages();
-              alert('✅ 留言导入成功！');
-            } catch (err) {
-              alert('❌ 文件格式不正确，请选择之前导出的 JSON 文件。');
-            }
-          };
-          reader.readAsText(file);
-          importFile.value = ''; // 允许重复选择同一文件
-        });
-      }
-
-      // 初始化留言显示
-      refreshMessages();
-
-      // 跨标签页同步
+      // 监听 localStorage 变化 (兼容不支持 BroadcastChannel 的环境)
       window.addEventListener('storage', (e) => {
-        if (e.key === 'muxue_bg' && e.newValue) changeBackground(e.newValue);
-        if (e.key === 'muxue_accent' && e.newValue) applyAccent(e.newValue);
         if (e.key === STORAGE_KEY) refreshMessages();
       });
 
+      // 提交留言
+      submitBtn?.addEventListener('click', () => {
+        const name = guestName?.value.trim() || '';
+        const msg = guestMsg?.value.trim() || '';
+        if (!msg) { alert('请填写留言内容 🌱'); return; }
+        addMessage(name, msg);
+        if (guestName) guestName.value = '';
+        if (guestMsg) guestMsg.value = '';
+      });
+
+      guestMsg?.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+          e.preventDefault();
+          submitBtn?.click();
+        }
+      });
+
+      // 导出/导入
+      exportBtn?.addEventListener('click', () => {
+        const msgs = loadMessages();
+        const blob = new Blob([JSON.stringify(msgs, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `muxue_留言备份_${new Date().toISOString().slice(0,10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+      });
+
+      importBtn?.addEventListener('click', () => importFile?.click());
+      importFile?.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+          try {
+            const imported = JSON.parse(ev.target.result);
+            if (!Array.isArray(imported)) throw new Error('格式错误');
+            const current = loadMessages();
+            const merged = [...current];
+            imported.forEach(item => {
+              if (item?.text && !merged.some(m => m.author === item.author && m.text === item.text)) {
+                merged.push({ author: item.author || '匿名', text: item.text });
+              }
+            });
+            saveMessages(merged.slice(-100));
+            refreshMessages();
+            broadcastUpdate();
+            alert('✅ 留言导入成功！');
+          } catch (err) {
+            alert('❌ 文件格式不正确，请选择之前导出的 JSON 文件。');
+          }
+        };
+        reader.readAsText(file);
+        importFile.value = '';
+      });
+
+      // 初始加载
+      refreshMessages();
+
+      // 提示同步状态
+      if (syncStatus) syncStatus.textContent = '🔄 多标签页实时同步中';
     })();
   </script>
 </body>
